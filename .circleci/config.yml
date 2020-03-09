@@ -1,3 +1,4 @@
+---
 jobs:
   build-and-push:
     executor: docker/docker
