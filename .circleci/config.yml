@@ -1,21 +1,26 @@
 ---
-version: 2
+version: 2.1
+orbs:
+  docker: circleci/docker@1.0.0
 jobs:
-  build:
-    docker:
-      - image: circleci/python
+  build-and-push:
+    executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
-      - run: echo "HHeeellloooo"
-  test:
-    docker:
-      - image: circleci/python
-    steps:
-      - checkout
-      - run: echo "Wooooorld"
+      - docker/check
+      - docker/build:
+        image: my_repo/orb-test
+      - docker/push:
+        digest-path: /tmp/digest.txt
+        image: my_repo/orb-test
+      - run:
+        command: |
+          echo "Digest is: $(</tmp/digest.txt)"
+orbs:
+  docker: circleci/docker@1.0.0
+version: 2.1
 workflows:
-  version: 2
-  build_and_test:
+  commit:
     jobs:
-      - build
-      - test
+      - build-and-push
