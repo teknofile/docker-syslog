@@ -1,7 +1,3 @@
----
-version: 2.1
-orbs:
-  docker: circleci/docker@1.0.0
 jobs:
   build-and-push:
     executor: docker/docker
