@@ -7,13 +7,13 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-        image: my_repo/orb-test
+          image: my_repo/orb-test
       - docker/push:
-        digest-path: /tmp/digest.txt
-        image: my_repo/orb-test
+          digest-path: /tmp/digest.txt
+          image: my_repo/orb-test
       - run:
-        command: |
-          echo "Digest is: $(</tmp/digest.txt)"
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 orbs:
   docker: circleci/docker@1.0.0
 version: 2.1
