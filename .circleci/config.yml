@@ -24,9 +24,9 @@ jobs:
   publish-latest:
     executor: docker-publisher
     steps:
-      - setup_remote_docker
       - attach_to_workspace:
           at: /tmp/workspace
+      - setup_remote_docker
       - run:
           name: Load Docker Image From Workspace
           command: docker load -i /tmp/workspace/image.tar
