@@ -24,7 +24,7 @@ jobs:
   publish-latest:
     executor: docker-publisher
     steps:
-      - attach_to_workspace:
+      - attach_workspace:
           at: /tmp/workspace
       - setup_remote_docker
       - run:
