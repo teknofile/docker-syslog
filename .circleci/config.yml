@@ -2,7 +2,8 @@ version: 2.1
 executors:
   docker-publisher:
     environment:
-      IMAGE_NAME: teknofile/building-on-ci
+      REPO_NAME: teknofile
+      IMAGE_NAME: tkfbase
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
@@ -13,7 +14,7 @@ jobs:
       - setup_remote_docker
       - run:
           name: Build Docker image
-          command: docker build -t ${IMAGE_NAME}:latest .
+          command: docker build -t ${REPO_NAME}/${IMAGE_NAME}:latest .
       - run:
           name: Archive Docker Image
           command: docker save -o image.tar ${IMAGE_NAME}
@@ -34,7 +35,7 @@ jobs:
           name: Publish Docker To Docker Hub
           command: |
             echo "${DOCKERHUB_PASS}" | docker login -u "${DOCKERHUB_USERNAME}" --password-stdin
-            docker push ${IMAGE_NAME}:latest
+            docker push ${REPO_NAME}/${IMAGE_NAME}:latest
 workflows:
   version: 2
   build-master:
