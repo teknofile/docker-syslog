@@ -7,7 +7,7 @@ RUN apk add --no-cache \
   alpine-keys \
   apk-tools \
   busybox \
-  build-dependencies \
+  build-base \
   libc-utils \
   xz \
   bash \
